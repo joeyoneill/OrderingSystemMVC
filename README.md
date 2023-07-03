@@ -11,3 +11,6 @@
     or
 
       ```dotnet watch```
+
+
+Currently, a known input bug is listed in the TODO.txt - needs fixing.
