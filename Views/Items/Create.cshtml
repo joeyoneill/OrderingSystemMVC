@@ -1,0 +1,42 @@
+@model mvc_obj_2.Data.Item
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="text-center">Add Item to Inventory</h1>
+<br>
+<h4 class="text-center">Item</h4>
+<hr />
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <br>
+            <div class="form-group">
+                <label asp-for="ItemName" class="control-label"><strong>Item Name</strong></label>
+                <input asp-for="ItemName" class="form-control" />
+                <span asp-validation-for="ItemName" class="text-danger"></span>
+            </div>
+            <br>
+            <div class="form-group">
+                <label asp-for="ItemPrice" class="control-label"><strong>Item Price</strong></label>
+                <input asp-for="ItemPrice" class="form-control" />
+                <span asp-validation-for="ItemPrice" class="text-danger"></span>
+            </div>
+            <br>
+            <div class="form-group text-center">
+                <input type="submit" value="Save Item" class="btn btn-danger" style="font-weight: bold;" />
+            </div>
+            <br>
+        </form>
+    </div>
+</div>
+
+<div class="text-center">
+    <a class="btn btn-primary btn-sm" asp-action="Index" style="font-weight: bold;"><i class="fas fa-chevron-left"></i> Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

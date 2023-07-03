@@ -1,0 +1,49 @@
+@model mvc_obj_2.Data.Order
+
+@{
+    ViewData["Title"] = "Create Order";
+}
+
+<h1 class="text-center">Create an Order</h1>
+<hr />
+<br>
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="OrderName" class="control-label"><strong>Name</strong></label>
+                <input asp-for="OrderName" class="form-control" />
+                <span asp-validation-for="OrderName" class="text-danger"></span>
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                <label asp-for="OrderAddress" class="control-label"><strong>Delivery Address</strong></label>
+                <input asp-for="OrderAddress" class="form-control" />
+                <span asp-validation-for="OrderAddress" class="text-danger"></span>
+            </div>
+            
+            <br>
+            
+            <input type="hidden" name="Subtotal" value=0>
+
+            <br>
+
+            <div class="form-group text-center">
+                <input type="submit" value="Save Order" class="btn btn-danger" style="font-weight: bold;"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<br>
+
+<div class="text-center">
+    <a asp-action="Index" class="btn btn-primary text-center" style="font-weight: bold;"><i class="fas fa-chevron-left"></i> Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

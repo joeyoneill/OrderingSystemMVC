@@ -1,0 +1,80 @@
+@model mvc_obj_2.Controllers.EditItemsViewModel
+
+@{
+    ViewData["Title"] = "Edit Order Items";
+}
+
+<h1 class="text-center">Edit Order Items</h1>
+
+<hr />
+
+<div style="text-align: center;">
+    <br>
+    <h4><strong>Order Details:</strong></h4>
+    <br>
+    <div style="display: inline-block; text-align: left;">
+        <h6><strong>Order ID:</strong> @Model.order.Id</h6>
+        <h6><strong>Order Name:</strong> @Model.order.OrderName</h6>
+        <h6><strong>Order Address:</strong> @Model.order.OrderAddress</h6>
+        <h6><strong>Subtotal:</strong> @Model.order.Subtotal</h6>
+    </div>
+</div>
+<br>
+
+<hr />
+<br>
+
+<h4>Order Items:</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th class="text-center">Item ID</th>
+            <th class="text-center">Item Name</th>
+            <th class="text-center">Item Price</th>
+            <th class="text-center">Remove from Order</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.orderItems.Count > 0) {
+            @foreach (var orderItem in Model.orderItems)
+            {
+                <tr>
+                    <td class="text-center">@orderItem.Item.Id</td>
+                    <td class="text-center">@orderItem.Item.ItemName</td>
+                    <td class="text-center">@orderItem.Item.ItemPrice</td>
+                    <td class="text-center">
+                        <form asp-action="RemoveItemFromOrder">
+                            <input type="hidden" id="OrdersItemsId" name="OrdersItemsId" value="@orderItem.Id">
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+        else {
+            <tr>
+                <td colspan="3" class="text-center">
+                    <strong>No Items Currently Saved to Order.</strong>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br>
+<hr />
+<br>
+<!--Add Item Button-->
+<div class="text-center">
+    <a asp-action="AddItem" asp-route-id="@Model.order.Id" class="btn btn-success" style="font-weight: bold;">Add Item to Order</a>
+</div>
+
+<br>
+
+<div class="text-center">
+    <a asp-action="Index" class="btn btn-primary" style="font-weight: bold;"><i class="fas fa-chevron-left"></i> Back to Orders List</a>
+</div>
+
+<br>

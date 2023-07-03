@@ -1,0 +1,70 @@
+@model mvc_obj_2.Controllers.AddItemsViewModel
+
+@{
+    ViewData["Title"] = "Add Item to Order";
+}
+
+<!--Error Message Check-->
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<!--Display Inventory-->
+<br>
+
+<h4>Inventory:</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Item ID</th>
+            <th>Item Name</th>
+            <th>Item Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.inventory)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.ItemName</td>
+                <td>@item.ItemPrice</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br>
+<hr>
+<br>
+
+<!--Add Item Form-->
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <form asp-action="AddItem">
+            
+            <input type="hidden" name="orderId" value="@Model.order.Id">
+
+            <div class="form-group">
+                <label name="itemId" class="control-label"><strong>Item Id #:</strong></label>
+                <input name="itemId" class="form-control" />
+            </div>
+
+            <br>
+
+            <div class="form-group text-center">
+                <input type="submit" value="Add Item" class="btn btn-success" style="font-weight: bold;"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<br>
+
+<div class="text-center">
+    <a asp-action="EditItems" asp-route-id="@Model.order.Id" class="btn btn-primary" style="font-weight: bold;">
+        <i class="fas fa-chevron-left"></i> Back
+    </a>
+</div>
+
+<br>

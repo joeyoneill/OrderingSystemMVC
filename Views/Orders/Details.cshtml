@@ -1,0 +1,68 @@
+@model mvc_obj_2.Controllers.DetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="text-center">Order @Model.order.Id Details</h1>
+
+<hr />
+
+<div style="text-align: center;">
+    <br>
+    <h4><strong>Order Details:</strong></h4>
+    <br>
+    <div style="display: inline-block; text-align: left;">
+        <h6><strong>Order ID:</strong> @Model.order.Id</h6>
+        <h6><strong>Order Name:</strong> @Model.order.OrderName</h6>
+        <h6><strong>Order Address:</strong> @Model.order.OrderAddress</h6>
+        <h6><strong>Subtotal:</strong> @Model.order.Subtotal</h6>
+    </div>
+</div>
+<br>
+
+<hr />
+<br>
+
+<h4>Order Items:</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Item ID</th>
+            <th>Item Name</th>
+            <th>Item Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.orderItems.Count > 0) {
+            @foreach (var orderItem in Model.orderItems)
+            {
+                <tr>
+                 <td>@orderItem.Item.Id</td>
+                 <td>@orderItem.Item.ItemName</td>
+                 <td>@orderItem.Item.ItemPrice</td>
+                </tr>
+            }
+        }
+        else {
+            <tr>
+                <td colspan="3" class="text-center">
+                    <strong>No Items Currently Saved to Order.</strong>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br>
+<hr />
+<br>
+
+<div class="text-center">
+    <a asp-action="Index" class="btn btn-primary btn-sm" style="font-weight: bold;">
+        <i class="fas fa-chevron-left"></i> Back to List
+    </a> |
+    <a asp-action="EditItems" asp-route-id="@Model.order.Id" class="btn btn-warning btn-sm" style="font-weight: bold;">
+       <i class="fas fa-pencil-alt"></i> Edit
+    </a>
+</div>

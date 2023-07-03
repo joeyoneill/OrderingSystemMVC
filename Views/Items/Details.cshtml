@@ -1,0 +1,35 @@
+@model mvc_obj_2.Data.Item
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Item Details</h1>
+<br>
+<div>
+    <h4><strong>Name: </strong>@Model.ItemName</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ItemPrice)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ItemPrice)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-primary btn-sm" asp-action="Index" style="font-weight: bold;"><i class="fas fa-chevron-left"></i> Back to List</a>
+    |
+    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@Model?.Id" style="font-weight: bold;">
+        <i class="fas fa-pencil-alt"></i> Edit
+    </a>
+</div>
+
+<br><br>

@@ -1,0 +1,83 @@
+@model IEnumerable<mvc_obj_2.Data.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container">
+    <h1 class="text-center">Welcome to the Order Manager</h1>
+    <hr>
+
+    <div class="text-center">
+        <a class="btn btn-success" style="font-weight: bold;" asp-action="Create">Create an Order</a>
+    </div>
+
+    
+@if (Model.Any()) {
+
+    <hr>
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col">
+
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="text-center">
+                                Order Name
+                            </th>
+                            <th class="text-center">
+                                Address
+                            </th>
+                            <th class="text-center">
+                                @Html.DisplayNameFor(model => model.Subtotal)
+                            </th>
+                            <th class="text-center">Edit Order Details</th>
+                            <th class="text-center">Edit Order Items</th>
+                            <th class="text-center">Order Details</th>
+                            <th class="text-center">Delete Order</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                @foreach (var order in Model) {
+                        <tr>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => order.OrderName)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => order.OrderAddress)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => order.Subtotal)
+                            </td>
+                            <td class="text-center">
+                                <a  class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@order.Id">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a  class="btn btn-warning btn-sm" asp-action="EditItems" asp-route-id="@order.Id">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@order.Id">
+                                    <i class="fa fa-info-circle"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@order.Id">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+</div>
