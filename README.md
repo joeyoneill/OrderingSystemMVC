@@ -13,4 +13,4 @@
       ```dotnet watch```
 
 
-Currently, a known input bug is listed in the TODO.txt - needs fixing.
+Currently, a known input bug is listed in the TODO.txt - still needs fixing.
