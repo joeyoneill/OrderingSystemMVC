@@ -121,12 +121,22 @@ namespace mvc_obj_2.Controllers
         // Adds Item to Order.orderId
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddItem(int? orderId, int? itemId)
+        public async Task<IActionResult> AddItem(int? orderId, string? itemId_input)
         {
             // initial null check
-            if (orderId == null || itemId == null || _context.Orders == null || _context.Items == null){
+            if (orderId == null || itemId_input == null || _context.Orders == null || _context.Items == null){
                 return NotFound();
             }
+
+            // Try to parse itemId_input
+            int itemId;
+            if (!int.TryParse(itemId_input, out itemId)) {
+                TempData["ErrorMessage"] = "Please Enter a Valid Item Id Number.";
+                return Redirect($"/Orders/AddItem/{orderId}");
+            }
+
+            Console.WriteLine("Order Id: " + orderId);
+            Console.WriteLine("Item Id: " + itemId);
 
             // Get Order + Item
             var order = await _context.Orders.FindAsync(orderId);
@@ -257,7 +267,7 @@ namespace mvc_obj_2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Orders == null)
+            if (_context.Orders == null || _context.OrdersItems == null)
             {
                 return Problem("Entity set 'TempdbContext.Orders'  is null.");
             }
@@ -284,6 +294,7 @@ namespace mvc_obj_2.Controllers
 
         // POST: Orders/RemoveItemFromOrder/{OrdersItemsId}
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveItemFromOrder(int? OrdersItemsId) {
 
             // initial null check
