@@ -1,9 +1,3 @@
 ####################################################################################
 # TODO List
 ####################################################################################
-
-OrdersController.cs + AddItem.cshtml - AddItem() - Add Item to Order Function
-    - Currently an issue with accepting non-int input.
-        - Returns a NotFound() page.
-        - It should be redirecting to the same page with a warning message telling the user to enter proper input.
-    - Therefore, we need to change it to accept non-int input and have it redirect properly.
